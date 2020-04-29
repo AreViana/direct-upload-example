@@ -34,7 +34,7 @@ class DirectUpload < BaseService
   # AWS PUT request with headers
   def signed_url(blob)
     response_signature(
-      blob.service_url_for_direct_upload,
+      blob.service_url_for_direct_upload(expires_in: expiration_time),
       headers: blob.service_headers_for_direct_upload
     )
   end
