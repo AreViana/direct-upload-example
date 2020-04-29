@@ -8,7 +8,7 @@ class CreateUser < BaseService
 
   def call
     user = User.create!(user_params)
-    user.attach(avatar) if avatar.present? && !!user
+    user.avatar.attach(avatar) if avatar.present? && !!user
 
     user.as_json(root: false, methods: :avatar_url).except('updated_at')
   end

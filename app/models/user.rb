@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   validates :full_name, :email, presence: true
+  validates :email, uniqueness: true
   validates_length_of :avatar, is: 122, if: -> { avatar.present? }
   has_one_attached :avatar
 
