@@ -22,3 +22,4 @@
 /config/master.key
 
 /.env
+/db/schema.rb
