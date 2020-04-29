@@ -2,7 +2,10 @@
 
 class Api::DirectUploadController < ApplicationController
   def create
-    response = DirectUpload.call(blob_params, url_params)
+    response = DirectUpload.call(
+      blob_params,
+      url_params.to_h.deep_symbolize_keys
+    )
     render json: response
   end
 
