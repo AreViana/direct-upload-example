@@ -1,0 +1,6 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+owner:
+  full_name: Arely Viana
+  linkedin: linkedin.com/in/areviana/
+  email: areviana17@gmail.com
