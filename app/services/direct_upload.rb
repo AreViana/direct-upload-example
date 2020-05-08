@@ -3,6 +3,7 @@
 # This service contains different methods to make an AWS request creating a signed URL
 class DirectUpload < BaseService
   def initialize(blob_args, **options)
+    validate_params(blob_args.merge(options).to_h)
     @blob_args = blob_args.to_h.deep_symbolize_keys
     @expiration_time = options[:expiration_time] || 10.minutes
     @folder = options[:folder]
@@ -21,6 +22,16 @@ class DirectUpload < BaseService
   private
 
   attr_reader :blob_args, :expiration_time, :folder
+
+  def validate_params(params)
+    validation = UploadContract.new.call(params)
+    raise CustomError.new(
+      details: validation.errors.to_hash,
+      title: 'Unprocessable entity',
+      message: 'Validation failed',
+      status: 422
+    ) if validation.failure?
+  end
 
   def create_blob
     blob = ActiveStorage::Blob.create_before_direct_upload!(blob_args)

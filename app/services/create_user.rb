@@ -2,6 +2,7 @@
 
 class CreateUser < BaseService
   def initialize(params)
+    validate_params(params.to_h)
     @user_params = params.except(:avatar)
     @avatar = params[:avatar]
   end
@@ -16,4 +17,14 @@ class CreateUser < BaseService
   private
 
   attr_reader :user_params, :avatar
+
+  def validate_params(params)
+    validation = UserContract.new.call(params)
+    raise CustomError.new(
+      details: validation.errors.to_hash,
+      title: 'Unprocessable entity',
+      message: 'Validation failed',
+      status: 422
+    ) if validation.failure?
+  end
 end
