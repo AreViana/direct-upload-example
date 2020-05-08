@@ -6,6 +6,11 @@ class Api::UsersController < ApplicationController
     render json: response
   end
 
+  def show
+    user = User.find(params[:id])
+    render json: user.to_json
+  end
+
   private
   def user_params
     params.require(:user).permit(:full_name, :email, :linkedin, :avatar)
