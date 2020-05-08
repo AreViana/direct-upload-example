@@ -5,6 +5,7 @@ module ExceptionHandler
   included do
     rescue_from CustomError, with: :custom_error
     rescue_from ArgumentError, with: :argument_error
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_record
     rescue_from ActionController::BadRequest, with: :bad_requests
     rescue_from ActionController::ParameterMissing, with: :param_missing
@@ -18,6 +19,14 @@ module ExceptionHandler
 
   def argument_error(exception)
     render_error(title: 'Argument Error', message: exception.to_s)
+  end
+
+  def record_not_found(exception)
+    render_error(
+      title: 'Record not found',
+      message: exception.to_s,
+      status: :not_found
+    )
   end
 
   def unprocessable_record(exception)
