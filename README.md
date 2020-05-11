@@ -155,13 +155,13 @@ The "url" node is optional!
     "checksum": "RfczTs94io0MRZlXjzEm/w==",
     "filename": "custon_name",
     "content_type": "image/png",
-		"metadata": {
-			"message": "active_storage_test"
-		},
-		"url": {
-      "expiration_time": "300",
-      "folder": "development/users"
-	  }
+	"metadata": {
+		"message": "active_storage_test"
+	}
+  },	   
+  "url": {
+    "expiration_time": "300",
+    "folder": "development/users"
   }
 }
 ```
@@ -195,12 +195,12 @@ The JSON response above provide you the `blob_signed_id` parameter, this ID must
 ### Example Body request
 ```json
 {
-	"user": {
-		"full_name": "Arely Viana",
+  "user": {
+    "full_name": "Arely Viana",
     "email": "arely@example.com",
     "linkedin": "linkedin.com/in/areviana",
-		"avatar": "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4397fc4a06ba581d521819faaafd4c230a073a7e"
-	}
+    "avatar": "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4397fc4a06ba581d521819faaafd4c230a073a7e"
+   }
 }
 ```
 ### Example JSON response
@@ -214,3 +214,4 @@ The JSON response above provide you the `blob_signed_id` parameter, this ID must
   "avatar_url": "https://your-bucket.s3.amazonaws.com/development/users/jhvbrzt2m81ukpsvtsaaqzpnb5i6"
 }
 ```
+An that's it! The integration of direct upload and Active Storage is complete!
